@@ -23,4 +23,4 @@ jobs:
         curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/statuses/${{ github.event.sha }}" \
         --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
         --header 'content-type: application/json' \
-        --data '{"state": "success", "description": "provisioning is successful", "context": "provisioner-id", "target_url": "http://link-in-status/"}'
+        --data '{"state": "pending", "description": "provisioning is successful", "context": "provisioner-id", "target_url": "http://link-in-status/"}'
