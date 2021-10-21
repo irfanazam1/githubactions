@@ -1,10 +1,10 @@
-name: deploy-provisioner
+name: compute-smoke-tests
 
 on:
  - status
 
 jobs:
-  deploy-provisioner:
+  compute-smoke-tests:
     runs-on: ubuntu-latest
     name: Deploy Provisioner
     if: ${{ github.event.state }} == 'success'
@@ -17,20 +17,44 @@ jobs:
        with:
          text: ${{ github.event.context }}
          regex: ${{ steps.vars.outputs.regex }}
-     - name: start_smoke_test
+     - name: provision_compute
        if: ${{ steps.regex-match.outputs.match != '' }}
        run: |
         curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/statuses/${{ github.event.sha }}" \
         --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
         --header 'content-type: application/json' \
-        --data '{"state": "pending", "description": "smoke tests started", "context": "provisioner-id", "target_url": "http://link-in-status/"}'
+        --data '{"state": "pending", "description": "provisioning compute", "context": "Compute Provisioning", "target_url": "http://link-in-status/"}'
      - uses: jakejarvis/wait-action@master
        with:
          time: '30s'
+     - name: complete_provision_compute
+       if: ${{ steps.regex-match.outputs.match != '' }}
+       run: |
+        curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/statuses/${{ github.event.sha }}" \
+        --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+        --header 'content-type: application/json' \
+        --data '{"state": "success", "description": "compute successfully provisioned", "context": "Compute Provisioning", "target_url": "http://link-in-status/"}'
      - name: start_smoke_test
        if: ${{ steps.regex-match.outputs.match != '' }}
        run: |
         curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/statuses/${{ github.event.sha }}" \
         --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
         --header 'content-type: application/json' \
-        --data '{"state": "success", "description": "smoke tests successful", "context": "provisioner-id", "target_url": "http://link-in-status/"}'
+        --data '{"state": "pending", "description": "smoke tests started", "context": "Smoke Tests", "target_url": "http://link-in-status/"}'
+     - uses: jakejarvis/wait-action@master
+       with:
+         time: '30s'
+     - name: complete_smoke_test
+       if: ${{ steps.regex-match.outputs.match != '' }}
+       run: |
+        curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/statuses/${{ github.event.sha }}" \
+        --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+        --header 'content-type: application/json' \
+        --data '{"state": "success", "description": "smoke tests completed successfully", "context": "Smoke Tests", "target_url": "http://link-in-status/"}'
+     - name: delete_compute
+       if: ${{ steps.regex-match.outputs.match != '' }}
+       run: |
+        curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/statuses/${{ github.event.sha }}" \
+        --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+        --header 'content-type: application/json' \
+        --data '{"state": "success", "description": "De-Provisioning Compyte", "context": "De-Provision Compute", "target_url": "http://link-in-status/"}'
