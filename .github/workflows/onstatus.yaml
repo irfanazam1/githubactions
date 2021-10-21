@@ -17,9 +17,10 @@ jobs:
        with:
          text: ${{ github.event.context }}
          regex: ${{ steps.vars.outputs.regex }}
-     - uses: actions-ecosystem/action-create-comment@v1
+     - uses: wei/curl@v1
        if: ${{ steps.regex-match.outputs.match != '' }}
        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          body: |
-            Hello, @${{ github.actor }}!
+          args: -request POST --url "https://api.github.com/repos/irfanazam1/githubactions/statuses/${GITHUB_SHA}" \
+          --header "Authorization: token ${secrets.GITHUB_TOKEN}" \
+          --header 'content-type: application/json' \
+          --data '{\"state\": \"success\", \"description\":\"my status 123\", \"context\":\"anything:ia-test:binary.linux:anything\", \"target_url\":\"http://link-in-status/\"}'
