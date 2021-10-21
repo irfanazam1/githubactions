@@ -1,0 +1,25 @@
+name: deploy-provisioner
+
+on:
+ - status
+
+jobs:
+  deploy-provisioner:
+    runs-on: ubuntu-latest
+    name: Deploy Provisioner
+    if: ${{ github.event.state }} == 'success'
+    steps:
+     - name: calc_regex
+       id: vars
+       run: echo ::set-output name=regex::".*${GITHUB_REF#refs/*/}:binary.linux:.*"
+     - uses: actions-ecosystem/action-regex-match@v2
+       id: regex-match
+       with:
+         text: ${{ github.event.context }}
+         regex: ${{ steps.vars.outputs.regex }}
+     - uses: actions-ecosystem/action-create-comment@v1
+       if: ${{ steps.regex-match.outputs.match != '' }}
+       with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          body: |
+            Hello, @${{ github.actor }}!
