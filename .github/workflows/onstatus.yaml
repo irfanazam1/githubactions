@@ -17,10 +17,21 @@ jobs:
        with:
          text: ${{ github.event.context }}
          regex: ${{ steps.vars.outputs.regex }}
-     - name: send_message
+     - name: start_smoke_test
        if: ${{ steps.regex-match.outputs.match != '' }}
        run: |
         curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/statuses/${{ github.event.sha }}" \
         --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
         --header 'content-type: application/json' \
-        --data '{"state": "pending", "description": "provisioning is successful", "context": "provisioner-id", "target_url": "http://link-in-status/"}'
+        --data '{"state": "pending", "description": "smoke tests started", "context": "provisioner-id", "target_url": "http://link-in-status/"}'
+     - name: wait-for-smoke-tests
+     - uses: jakejarvis/wait-action@master
+       with:
+         time: '30s'
+     - name: start_smoke_test
+       if: ${{ steps.regex-match.outputs.match != '' }}
+       run: |
+        curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/statuses/${{ github.event.sha }}" \
+        --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+        --header 'content-type: application/json' \
+        --data '{"state": "success", "description": "smoke tests successful", "context": "provisioner-id", "target_url": "http://link-in-status/"}'
