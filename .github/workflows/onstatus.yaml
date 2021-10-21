@@ -24,7 +24,6 @@ jobs:
         --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
         --header 'content-type: application/json' \
         --data '{"state": "pending", "description": "smoke tests started", "context": "provisioner-id", "target_url": "http://link-in-status/"}'
-     - name: wait-for-smoke-tests
      - uses: jakejarvis/wait-action@master
        with:
          time: '30s'
