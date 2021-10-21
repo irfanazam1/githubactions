@@ -21,6 +21,6 @@ jobs:
        if: ${{ steps.regex-match.outputs.match != '' }}
        run: |
         curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/statuses/${GITHUB_SHA}" \
-        --header "Authorization: token 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" \
+        --header "Authorization: token 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" \
         --header 'content-type: application/json' \
         --data '{"state": "success", "description": "my status", "context": "anything:ia-test:binary.linux:anything", "target_url": "http://link-in-status/"}'
