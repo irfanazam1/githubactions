@@ -46,7 +46,6 @@ jobs:
        with:
          time: '30s'
      - name: complete_provision_compute
-       if: ${{ steps.regex-match.outputs.match != '' }}
        run: |
         curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/statuses/${{ github.event.sha }}" \
         --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
@@ -59,7 +58,6 @@ jobs:
     needs: provision-compute
     steps:
      - name: start_smoke_test
-       if: ${{ steps.regex-match.outputs.match != '' }}
        run: |
         curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/statuses/${{ github.event.sha }}" \
         --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
@@ -69,19 +67,11 @@ jobs:
        with:
          time: '30s'
      - name: complete_smoke_test
-       if: ${{ steps.regex-match.outputs.match != '' }}
        run: |
         curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/statuses/${{ github.event.sha }}" \
         --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
         --header 'content-type: application/json' \
         --data '{"state": "success", "description": "smoke tests completed successfully", "context": "Smoke Tests", "target_url": "http://link-in-status/"}'
-     - name: delete_compute
-       if: ${{ steps.regex-match.outputs.match != '' }}
-       run: |
-        curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/statuses/${{ github.event.sha }}" \
-        --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-        --header 'content-type: application/json' \
-        --data '{"state": "success", "description": "De-Provisioning Compyte", "context": "De-Provision Compute", "target_url": "http://link-in-status/"}'
         
   deprovision-compute:
     runs-on: ubuntu-latest
@@ -89,7 +79,6 @@ jobs:
     needs: smoke-tests
     steps:
      - name: delete_compute
-       if: ${{ steps.regex-match.outputs.match != '' }}
        run: |
         curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/statuses/${{ github.event.sha }}" \
         --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
