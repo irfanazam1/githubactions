@@ -1,24 +1,42 @@
-name: compute-smoke-tests
+name: smoke-tests
 
 on:
  - status
 
 jobs:
-  compute-smoke-tests:
+  check-commit-status:
     runs-on: ubuntu-latest
-    name: Deploy Provisioner
-    if: ${{ github.event.state }} == 'success'
+    name: Check Commit Status
+    if: ${{ github.event.state }} != 'success'
     steps:
-     - name: calc_regex
-       id: vars
+     - name: Exit Workflow
+       run: exit 1
+       
+  smoke-tests-precheck:
+    runs-on: ubuntu-latest
+    name: Smoke Tests Pre-check
+    needs: check-commit-status
+    # if: ${{ github.event.state }} == 'success'
+    steps:
+     - name: check-build-completion
+       id: expression
        run: echo ::set-output name=regex::".*:binary.linux:.*"
      - uses: actions-ecosystem/action-regex-match@v2
        id: regex-match
        with:
          text: ${{ github.event.context }}
-         regex: ${{ steps.vars.outputs.regex }}
+         regex: ${{ steps.expression.outputs.regex }}
+     - name: check-completion
+       if: ${{ steps.regex-match.outputs.match == '' }}
+       run: exit 1    
+               
+  provision-compute:
+    runs-on: ubuntu-latest
+    name: Provision Compute
+    needs: smoke-tests-precheck
+    # if: ${{ github.event.state }} == 'success'
+    steps:
      - name: provision_compute
-       if: ${{ steps.regex-match.outputs.match != '' }}
        run: |
         curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/statuses/${{ github.event.sha }}" \
         --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
@@ -34,6 +52,12 @@ jobs:
         --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
         --header 'content-type: application/json' \
         --data '{"state": "success", "description": "compute successfully provisioned", "context": "Provision Compute", "target_url": "http://link-in-status/"}'
+        
+  smoke-tests:
+    runs-on: ubuntu-latest
+    name: Run Smoke Tests
+    needs: provision-compute
+    steps:
      - name: start_smoke_test
        if: ${{ steps.regex-match.outputs.match != '' }}
        run: |
@@ -51,6 +75,19 @@ jobs:
         --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
         --header 'content-type: application/json' \
         --data '{"state": "success", "description": "smoke tests completed successfully", "context": "Smoke Tests", "target_url": "http://link-in-status/"}'
+     - name: delete_compute
+       if: ${{ steps.regex-match.outputs.match != '' }}
+       run: |
+        curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/statuses/${{ github.event.sha }}" \
+        --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+        --header 'content-type: application/json' \
+        --data '{"state": "success", "description": "De-Provisioning Compyte", "context": "De-Provision Compute", "target_url": "http://link-in-status/"}'
+        
+  deprovision-compute:
+    runs-on: ubuntu-latest
+    name: De-provision Compute
+    needs: smoke-tests
+    steps:
      - name: delete_compute
        if: ${{ steps.regex-match.outputs.match != '' }}
        run: |
