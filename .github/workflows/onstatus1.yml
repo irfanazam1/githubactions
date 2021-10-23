@@ -17,7 +17,7 @@ jobs:
        run: |
         echo $branch | jq '.name'
        env:
-        branch = ${{ steps.set-branch.outputs.branch}}
+        branch: ${{ steps.set-branch.outputs.branch}}
      - name: check-build-completion
        id: expression
        run: echo ::set-output name=regex::".*:binary.linux:.*"
