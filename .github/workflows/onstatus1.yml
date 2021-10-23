@@ -12,7 +12,7 @@ jobs:
      - name: branches-json
        id: branch
        run: |
-        echo ::set-output name=branch::"${{ toJson(github.event.branches)}}"
+        echo ::set-output name=branch::${{ toJson(github.event.branches)}}
      - name: check-build-completion
        id: expression
        run: echo ::set-output name=regex::".*:binary.linux:.*"
