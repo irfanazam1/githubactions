@@ -9,6 +9,9 @@ jobs:
     name: Smoke Tests Pre-check
     if: ${{ github.event.state }} == 'success'
     steps: 
+     - name: branches
+       id: branches
+       run: echo ::set-output name=branches::${{ toJson(github.event.branches) }}
      - name: check-build-completion
        id: expression
        run: echo ::set-output name=regex::".*:binary.linux:.*"
