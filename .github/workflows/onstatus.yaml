@@ -2,10 +2,10 @@ name: smoke-tests
 
 on:
  workflow_dispatch:
-  inputs:
-   commit-sha:
-    description: 'commit id'
-    required: true
+   inputs:
+    commit-sha:
+      description: 'commit id'
+      required: true
     
 jobs:    
   provision-compute:
