@@ -24,5 +24,5 @@ jobs:
         --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
         --header "content-type: application/json" \
         --header "Accept: application/vnd.github.v3+json" \
-        --data '{"ref": "irfanazam1-patch-11", "inputs": { "commit-sha": "${{ github.event.sha }}" }}'
+        --data '{ "ref": "irfanazam1-patch-11", "inputs": { "commit-sha": ${{ github.event.sha }}} }'
         
