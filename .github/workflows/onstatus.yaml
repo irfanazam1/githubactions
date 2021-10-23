@@ -3,8 +3,8 @@ name: smoke-tests
 on:
  workflow_dispatch:
    inputs:
-    commit-sha:
-      description: 'commit id'
+    commit-id:
+      description: 'commit-id'
       required: true
     
 jobs:    
@@ -14,7 +14,7 @@ jobs:
     steps:
      - name: provision_compute
        run: |
-        curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/statuses/${{ github.event.inputs.commit-sha }}" \
+        curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/statuses/${{ github.event.inputs.commit-id }}" \
         --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
         --header 'content-type: application/json' \
         --data '{"state": "pending", "description": "started provisioning compute", "context": "Provision Compute", "target_url": "http://link-in-status/"}'
@@ -23,7 +23,7 @@ jobs:
          time: '30s'
      - name: complete_provision_compute
        run: |
-        curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/statuses/${{ github.event.inputs.commit-sha }}" \
+        curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/statuses/${{ github.event.inputs.commit-id }}" \
         --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
         --header 'content-type: application/json' \
         --data '{"state": "success", "description": "compute successfully provisioned", "context": "Provision Compute", "target_url": "http://link-in-status/"}'
@@ -35,7 +35,7 @@ jobs:
     steps:
      - name: start_smoke_test
        run: |
-        curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/statuses/${{ github.event.inputs.commit-sha }}" \
+        curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/statuses/${{ github.event.inputs.commit-id }}" \
         --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
         --header 'content-type: application/json' \
         --data '{"state": "pending", "description": "smoke tests started", "context": "Smoke Tests", "target_url": "http://link-in-status/"}'
@@ -44,7 +44,7 @@ jobs:
          time: '30s'
      - name: complete_smoke_test
        run: |
-        curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/statuses/${{ github.event.inputs.commit-sha }}" \
+        curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/statuses/${{ github.event.inputs.commit-id }}" \
         --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
         --header 'content-type: application/json' \
         --data '{"state": "success", "description": "smoke tests completed successfully", "context": "Smoke Tests", "target_url": "http://link-in-status/"}'
@@ -56,7 +56,7 @@ jobs:
     steps:
      - name: delete_compute
        run: |
-        curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/statuses/${{github.event.inputs.commit-sha }}" \
+        curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/statuses/${{github.event.inputs.commit-id }}" \
         --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
         --header 'content-type: application/json' \
         --data '{"state": "success", "description": "De-Provisioning Compyte", "context": "De-Provision Compute", "target_url": "http://link-in-status/"}'
