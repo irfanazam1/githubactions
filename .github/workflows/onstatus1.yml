@@ -21,6 +21,6 @@ jobs:
        if: ${{ steps.regex-match.outputs.match != '' }}
        run: |
         curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/actions/workflows/onstatus.yaml/dispatches" \
-        --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-        --data '{ "ref": "irfanazam1-patch-13", "inputs":{ "sha":"123"} }'
+        --header "Authorization: token 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" \
+        --data "{ \"ref\": \"irfanazam1-patch-13\", \"inputs\":{ \"sha\": \"${{ github.event.sha }}\" }}'
         
