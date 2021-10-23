@@ -12,7 +12,7 @@ jobs:
      - name: set-branch
        id: set-branch
        run: |
-        echo ::set-output name=branch::${{toJSON(github.event.branches)}}
+        echo ::set-output name=branch::"${{toJSON(github.event.branches)}}"
      - name: get-branch
        run: |
         echo $branch | jq '.name'
