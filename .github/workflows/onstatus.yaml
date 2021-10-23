@@ -1,41 +1,12 @@
 name: smoke-tests
 
 on:
- status:
-  types: [success]
+ workflow_dispatch:
 
-jobs:
-  check-commit-status:
-    runs-on: ubuntu-latest
-    name: Check Commit Status
-    if: ${{ github.event.state }} != 'success'
-    steps:
-    - name: Exit Workflow
-      run: exit 0
-       
-  smoke-tests-precheck:
-    runs-on: ubuntu-latest
-    name: Smoke Tests Pre-check
-    needs: check-commit-status
-    # if: ${{ github.event.state }} == 'success'
-    steps:
-     - name: check-build-completion
-       id: expression
-       run: echo ::set-output name=regex::".*:binary.linux:.*"
-     - uses: actions-ecosystem/action-regex-match@v2
-       id: regex-match
-       with:
-         text: ${{ github.event.context }}
-         regex: ${{ steps.expression.outputs.regex }}
-     - name: check-completion
-       if: ${{ steps.regex-match.outputs.match == '' }}
-       run: exit 1    
-               
+jobs:    
   provision-compute:
     runs-on: ubuntu-latest
     name: Provision Compute
-    needs: smoke-tests-precheck
-    # if: ${{ github.event.state }} == 'success'
     steps:
      - name: provision_compute
        run: |
