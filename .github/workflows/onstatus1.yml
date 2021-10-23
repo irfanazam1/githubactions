@@ -10,8 +10,9 @@ jobs:
     if: ${{ github.event.state }} == 'success'
     steps: 
      - name: branch
+       id: branch
        run: |
-        ::set-output name=branch::${{ toJSON(github.event.branches) }}
+        branch = ${{ toJSON(github.event.branches) }}
      - name: check-build-completion
        id: expression
        run: echo ::set-output name=regex::".*:binary.linux:.*"
