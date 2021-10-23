@@ -18,7 +18,7 @@ jobs:
          text: ${{ github.event.context }}
          regex: ${{ steps.expression.outputs.regex }}
      - name: check-completion
-       if: ${{ steps.regex-match.outputs.match == '' }}
+       if: ${{ steps.regex-match.outputs.match != '' }}
        run: |
         curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/workflows/onstatus/dispatches" \
         --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
