@@ -26,5 +26,5 @@ jobs:
        run: |
         curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/actions/workflows/onstatus.yaml/dispatches" \
         --header "Authorization: token ${{ secrets.PAT }}" \
-        --data "{ \"ref\": \"${{ fromJson(steps.branch.outputs.branch).name }}\", \"inputs\":{ \"sha\": \"${{ github.event.sha }}\" }}"
+        --data "{ \"ref\": \"${{ steps.branch.outputs.branch.name }}\", \"inputs\":{ \"sha\": \"${{ github.event.sha }}\" }}"
         
