@@ -1,7 +1,8 @@
 name: smoke-tests
 
 on:
- - status
+ status:
+  types: [success]
 
 jobs:
   check-commit-status:
