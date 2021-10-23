@@ -7,12 +7,12 @@ jobs:
   smoke-tests-precheck:
     runs-on: ubuntu-latest
     name: Smoke Tests Pre-check
-    env:
-     output: ${{ github.event.branches }}
     if: ${{ github.event.state }} == 'success'
     steps: 
      - name: print-branch-name
-       run: echo "${output}"
+       env:
+         BRANCHES= ${{ toJson(github.event.branches) }}
+       run: echo "$BRANCHES"
      - name: check-build-completion
        id: expression
        run: echo ::set-output name=regex::".*:binary.linux:.*"
