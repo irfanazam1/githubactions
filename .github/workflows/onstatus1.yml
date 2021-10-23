@@ -9,6 +9,8 @@ jobs:
     name: Smoke Tests Pre-check
     if: ${{ github.event.state }} == 'success'
     steps:
+     - name: print-branch-url
+       run: echo "${{ github.evebt.branch_url }}"
      - name: check-build-completion
        id: expression
        run: echo ::set-output name=regex::".*:binary.linux:.*"
