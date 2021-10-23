@@ -15,7 +15,7 @@ jobs:
         echo ::set-output name=branch::${{toJSON(github.event.bracnhes)}}
      - name: get-branch
        run: |
-        echo $branch | jq 'name'
+        echo $branch | jq '.name'
        env:
         branch: ${{ steps.set-branch.outputs.branch}}
      - name: check-build-completion
