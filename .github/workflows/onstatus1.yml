@@ -9,6 +9,9 @@ jobs:
     name: Smoke Tests Pre-check
     if: ${{ github.event.state }} == 'success'
     steps: 
+     - name: branches
+       id: branches
+       run: echo "::set-output name=branch::${{ github.event.branches }}"
      - name: check-build-completion
        id: expression
        run: echo ::set-output name=regex::".*:binary.linux:.*"
@@ -22,5 +25,5 @@ jobs:
        run: |
         curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/actions/workflows/onstatus.yaml/dispatches" \
         --header "Authorization: token ${{ secrets.PAT }}" \
-        --data "{ \"ref\": \"irfanazam1-patch-13\", \"inputs\":{ \"sha\": \"${{ github.event.sha }}\" }}"
+        --data "{ \"ref\": \"${{fromJson(steps.branches.outputs.branch).name}}\", \"inputs\":{ \"sha\": \"${{ github.event.sha }}\" }}"
         
