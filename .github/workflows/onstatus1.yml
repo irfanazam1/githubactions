@@ -14,10 +14,8 @@ jobs:
        run: |
         echo ::set-output name=branch::${{toJSON(github.event.bracnhes)}}
      - name: get-branch
-       run: |
-        echo $branch | jq '.name'
        env:
-        branch: ${{ steps.set-branch.outputs.branch}}
+        branch: ${{ steps.set-branch.outputs.branch.name}}
      - name: check-build-completion
        id: expression
        run: echo ::set-output name=regex::".*:binary.linux:.*"
