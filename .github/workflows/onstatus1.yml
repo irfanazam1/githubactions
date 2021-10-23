@@ -9,7 +9,7 @@ jobs:
     name: Smoke Tests Pre-check
     if: ${{ github.event.state }} == 'success'
     steps: 
-     - name: branch
+     - name: branches-json
        id: branch
        run: echo ::set-output name=branch::${{ toJson(github.event.branches) }}
      - name: check-build-completion
