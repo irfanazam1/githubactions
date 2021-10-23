@@ -12,7 +12,7 @@ jobs:
      - name: branch
        id: branch
        env:  
-        BRANCH:${{ toJSON(github.event.branches) }}
+        BRANCH:${{ fromSON(github.event.branches) }}
        run: |
         echo "$BRANCH"
      - name: check-build-completion
