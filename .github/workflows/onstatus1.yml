@@ -1,15 +1,13 @@
 name: smoke-tests-precheck
 
 on:
- status:
-  branches:
-   - '!*'
+ - status
  
-jobs:     
+jobs:
   smoke-tests-precheck:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     name: Smoke Tests Pre-check
-    if: ${{ github.event.state }} == 'success'
     steps:
      - name: check-build-completion
        id: expression
