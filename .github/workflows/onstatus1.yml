@@ -5,7 +5,7 @@ on:
  
 jobs:
   smoke-tests-precheck:
-    if: ${{ false }}
+    if: ${{ github.event.state }} == 'success'
     runs-on: ubuntu-latest
     name: Smoke Tests Pre-check
     steps:
