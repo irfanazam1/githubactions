@@ -7,7 +7,7 @@ on:
        description: 'sha'
        required: true
        default: ''
-    environment:
+     environment:
        description: 'environment name'
        required: true
        default: 'latest'   
@@ -17,14 +17,14 @@ jobs:
     runs-on: ubuntu-latest
     name: Prepare Config
     steps:
-     ${{ if github.event.inputs.environment == 'latest'  }}
+     - if: ${{ github.event.inputs.environment == 'latest'  }}
      - name: prepare_latest_config
        run: |
         mkdir -p $HOME/.rai
         echo -e "[latest]\n"
         echo -e "access_key=123\n"
-    ${{ if github.event.inputs.environment == 'latest'  }}
-    - name: prepare_staging_config
+     - if: ${{ github.event.inputs.environment == 'staging'  }}
+     - name: prepare_staging_config
        run: |
         mkdir -p $HOME/.rai
         echo -e "[staging]\n"
