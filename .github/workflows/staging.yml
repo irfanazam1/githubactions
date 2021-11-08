@@ -10,7 +10,7 @@ on:
      environment:
        description: 'environment name'
        required: true
-       default: 'latest'   
+       default: 'LATEST'   
     
 jobs:    
   provision-compute:
@@ -23,9 +23,11 @@ jobs:
         mkdir -p $HOME/.rai
         echo -e "[latest]\n"
         echo -e "access_key=123\n"
+        echo -e "${{ secrets.PASSWORD_${{ github.event.inputs.environment }} }}"
      - name: prepare_staging_config
        if: ${{ github.event.inputs.environment == 'staging'  }}
        run: |
         mkdir -p $HOME/.rai
         echo -e "[staging]\n"
+        echo -e "${{ secrets.PASSWORD_${{ github.event.inputs.environment }} }}"
         
