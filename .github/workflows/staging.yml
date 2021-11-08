@@ -1,0 +1,31 @@
+name: smoke-tests
+
+on:
+ workflow_dispatch:
+   inputs:
+     sha:
+       description: 'sha'
+       required: true
+       default: ''
+    environment:
+       description: 'environment name'
+       required: true
+       default: 'latest'   
+    
+jobs:    
+  provision-compute:
+    runs-on: ubuntu-latest
+    name: Prepare Config
+    steps:
+     ${{ if github.event.inputs.environment == 'latest'  }}
+     - name: prepare_latest_config
+       run: |
+        mkdir -p $HOME/.rai
+        echo -e "[latest]\n"
+        echo -e "access_key=123\n"
+    ${{ if github.event.inputs.environment == 'latest'  }}
+    - name: prepare_staging_config
+       run: |
+        mkdir -p $HOME/.rai
+        echo -e "[staging]\n"
+        
