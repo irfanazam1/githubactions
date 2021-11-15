@@ -1,4 +1,4 @@
-name: smoke-tests
+name: deploy
 
 on:
  workflow_dispatch:
