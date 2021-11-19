@@ -19,7 +19,7 @@ jobs:
     steps:
      - name: build-code
        run: echo "Buiding Code"
-     - uses: ./.github/actions/test.yml
+     - uses: ./.github/actions/
        with:
          engine_version: 'xyzabcd'
          environment: 'latest'
