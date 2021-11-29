@@ -19,10 +19,12 @@ jobs:
     steps:
      - name: build-code
        run: echo "Buiding Code"
-     - uses: ./.github/actions/deploy/
+     - uses: actions/checkout@v2
+     - id: foo
+       uses: ./.github/actions/deploy
        with:
-         engine_version: 'xyzabcd'
-         environment: 'latest'
+          engin_version: ${{ event.github.inputs.engine_version }}
+          environment: "default"
         
   staging:
     needs: build
