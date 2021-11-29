@@ -23,7 +23,7 @@ jobs:
      - id: foo
        uses: ./.github/actions/deploy
        with:
-          engin_version: ${{ event.github.inputs.engine_version }}
+          engin_version: ${{ github.event.inputs.engine_version }}
           environment: "default"
         
   staging:
