@@ -21,8 +21,10 @@ jobs:
      - name: build-code
        run: echo "Buiding Code"
      - uses: actions/checkout@v2
+       with:
+         path: code
      - id: foo
-       uses: ./.github/actions/deploy
+       uses: ./code/.github/actions/deploy
        with:
           engine_version: ${{ github.event.inputs.engine_version }}
           environment: "default"
