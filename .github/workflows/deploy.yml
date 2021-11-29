@@ -6,7 +6,6 @@ on:
      sha:
        description: 'sha'
        required: true
-       default: ''   
      
      engine_version:
       description: 'engine version'
