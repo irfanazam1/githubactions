@@ -8,6 +8,10 @@ inputs:
   environment:
    required: true
    description: 'Environment name'
+  
+  CLIENT_ID:
+   required: true
+   description: 'Client ID'
    
 runs:
   using: "composite"
@@ -17,6 +21,6 @@ runs:
   - run: |
       echo "${{ github.event.inputs.engine_version }}"
       echo "${{ github.event.inputs.environment }}"
-      echo "${{ secrets.CLIENT_ID }}"
+      echo "${{ github.event.inputs.CLIENT_ID }}"
     shell: bash
   
