@@ -20,6 +20,7 @@ runs:
       echo "${{ github.event.inputs.engine_version }}"
       echo "${{ github.event.inputs.environment }}"
       echo "${{ github.event.inputs.CLIENT_ID }}"
-      echo -e "Hello World\n" >> $HOME/.rai/config
+      echo "VAL=${{secrets.CLIENT_ID_STAGING}}" >> $GITHUB_ENV
     shell: bash
-  
+  - run: echo ${{env.VAL}}
+    shell: bash
