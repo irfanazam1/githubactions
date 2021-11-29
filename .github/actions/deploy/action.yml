@@ -5,7 +5,7 @@ inputs:
     required: true
     description: 'RAI engine version'
  
- environment:
+  environment:
    required: true
    description: 'Environment name'
    
