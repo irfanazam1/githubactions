@@ -15,3 +15,5 @@ runs:
   - run: |
       echo "${{ github.event.inputs.engine_version }}"
       echo "${{ github.event.inputs.environment }}"
+    shell: bash
+  
