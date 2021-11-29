@@ -15,8 +15,6 @@ inputs:
    
 runs:
   using: "composite"
-  environment:
-    name: build
   steps:
   - run: |
       echo "${{ github.event.inputs.engine_version }}"
