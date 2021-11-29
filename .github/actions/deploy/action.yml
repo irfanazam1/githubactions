@@ -11,9 +11,12 @@ inputs:
    
 runs:
   using: "composite"
+  environment:
+    name: build
   steps:
   - run: |
       echo "${{ github.event.inputs.engine_version }}"
       echo "${{ github.event.inputs.environment }}"
+      echo "${{ secrets.CLIENT_ID }}"
     shell: bash
   
