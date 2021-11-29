@@ -1,1 +1,17 @@
-dd
+name: 'run-smoketests-action'
+description: 'Runs smoketests on the provided environment'
+inputs: 
+  engine_version:
+    required: true
+    description: 'RAI engine version'
+ 
+ environment:
+   required: true
+   description: 'Environment name'
+   
+runs:
+  using: "composite"
+  steps:
+  - run: |
+      echo "${{ github.event.inputs.engine_version }}"
+      echo "${{ github.event.inputs.environment }}"
