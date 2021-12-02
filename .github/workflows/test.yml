@@ -13,3 +13,8 @@ jobs:
          sudo chmod a+x /usr/local/bin/yq
          yq --help
         
+     
+     - uses: cachix/install-nix-action@v15
+     - run: |
+         nix-env -iA nixpkgs.yq w -i '.provisioner.raiserver.version = strenv(ENGINE_VERSION)' relationalai-infra/infra/charts/raicloud/values.yaml
+     
