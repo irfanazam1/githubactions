@@ -1,0 +1,14 @@
+name: deploy
+
+on:
+ workflow_dispatch:
+   
+jobs:    
+  build:
+    runs-on: ubuntu-latest
+    name: build
+    steps:
+     - run: |
+       sudo apt-get update
+       sudo apt-get install yq -y
+        
