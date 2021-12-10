@@ -14,4 +14,9 @@ jobs:
           ref: main
           repository: irfanazam1/githubactions
           path: githubactions
+     
+      - run: |
+          git checkout deploy/raicloud/prod
+          git status
+       
           
