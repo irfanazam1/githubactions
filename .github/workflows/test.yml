@@ -11,12 +11,25 @@ jobs:
       # Checkout smoke tests
       - uses: actions/checkout@v2
         with:
+          ref: main
           repository: irfanazam1/githubactions
           path: githubactions
      
       - run: |
-          git checkout main
-          git checkout deploy/raicloud/prod
-          git status
+          cd githubactions
+          echo README.md >> ""
+          git add README.md
+          git commit -m "updated the readme.md"
+          git push
+          echo "COMMIT_ID=$(git git rev-parse HEAD)" >> $GITHUB_ENV
+        
+      - uses: actions/checkout@v2
+        with:
+          ref: deploy/raicloud/prod
+          repository: irfanazam1/githubactions
+          path: githubactions
        
-          
+      - run: |
+          cd githubactions
+          git cherry-pick ${{ env.COMMIT_ID }}
+          git push
