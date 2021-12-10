@@ -18,6 +18,8 @@ jobs:
       - run: |
           cd githubactions
           echo "" >> README.md
+          git config --global user.email "mazam76@gmail.com"
+          git config --global user.name "Irfan Azam"
           git add README.md
           git commit -m "updated the readme.md"
           git push
