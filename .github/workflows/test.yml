@@ -17,7 +17,7 @@ jobs:
      
       - run: |
           cd githubactions
-          echo README.md >> ""
+          echo "" >> README.md
           git add README.md
           git commit -m "updated the readme.md"
           git push
