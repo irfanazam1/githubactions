@@ -11,11 +11,11 @@ jobs:
       # Checkout smoke tests
       - uses: actions/checkout@v2
         with:
-          ref: main
           repository: irfanazam1/githubactions
           path: githubactions
      
       - run: |
+          git checkout main
           git checkout deploy/raicloud/prod
           git status
        
