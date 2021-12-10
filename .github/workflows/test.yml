@@ -8,9 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     name: build
     steps:
-      - name: build-label-check
+      # Checkout smoke tests
       - uses: actions/checkout@v2
         with:
           ref: main
-          repository: irfanazam1/githubactions
+          repository: irfanazam1/githubactions1
           path: githubactions
+          
