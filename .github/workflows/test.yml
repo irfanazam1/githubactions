@@ -9,5 +9,8 @@ jobs:
     name: build
     steps:
       - name: build-label-check
-        if: ${{ github.event.labels.build != '' }}
-        run: echo "Build label is present"
+      - uses: actions/checkout@v2
+        with:
+          ref: main
+          repository: irfanazam1/githubactions
+          path: githubactions
