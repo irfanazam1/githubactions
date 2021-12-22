@@ -46,7 +46,7 @@ jobs:
           repo: githubactions
           github_token: ${{ secrets.PAT }}
           workflow_file_name: three.yml
-          wait_interval: 300
+          wait_interval: 30
           inputs: '{"sha":"123456"}'
           propagate_failure: true
           trigger_workflow: true
