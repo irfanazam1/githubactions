@@ -8,30 +8,49 @@ jobs:
     runs-on: ubuntu-latest
     name: one
     steps:
-      # Checkout smoke tests
-      - run: |
-         sleep 30
-        shell: bash
+      - uses: convictional/trigger-workflow-and-wait@v1.3.0
+        with:
+          owner: irfanazam1
+          repo: githubactions
+          github_token: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN }}
+          workflow_file_name: one.yml
+          wait_interval: 300
+          inputs: '{"sha":"123456"}'
+          propagate_failure: true
+          trigger_workflow: true
+          wait_workflow: true
   
   two:
     runs-on: ubuntu-latest
     name: two
     steps:
-      # Checkout smoke tests
-      - run: |
-         sleep 50
-        shell: bash
+      - uses: convictional/trigger-workflow-and-wait@v1.3.0
+        with:
+          owner: irfanazam1
+          repo: githubactions
+          github_token: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN }}
+          workflow_file_name: two.yml
+          wait_interval: 300
+          inputs: '{"sha":"123456"}'
+          propagate_failure: true
+          trigger_workflow: true
+          wait_workflow: true
  
   three:
     runs-on: ubuntu-latest
     name: three
     steps:
-      # Checkout smoke tests
-      - run: |
-         sleep 40
-         exit 1
-        shell: bash
-        
+      - uses: convictional/trigger-workflow-and-wait@v1.3.0
+        with:
+          owner: irfanazam1
+          repo: githubactions
+          github_token: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN }}
+          workflow_file_name: three.yml
+          wait_interval: 300
+          inputs: '{"sha":"123456"}'
+          propagate_failure: true
+          trigger_workflow: true
+          wait_workflow: true  
       
   finally:
     runs-on: ubuntu-latest
