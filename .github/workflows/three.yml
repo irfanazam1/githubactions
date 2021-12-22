@@ -1,0 +1,19 @@
+name: three.yml
+
+on:
+ workflow_dispatch:
+   inputs:
+     sha:
+       description: 'sha'
+       required: true
+       default: ''
+    
+jobs:    
+  three:
+    runs-on: ubuntu-latest
+    name: Job Three
+    steps:
+    - run: |
+        sleep 50
+        echo ${{ inputs.sha }}
+      shell: bash
