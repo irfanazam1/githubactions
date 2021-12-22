@@ -4,34 +4,43 @@ on:
  workflow_dispatch:
    
 jobs:    
-  build:
+  one:
     runs-on: ubuntu-latest
-    name: build
+    name: one
     steps:
       # Checkout smoke tests
-      - uses: actions/checkout@v2
-        with:
-          ref: main
-          repository: irfanazam1/githubactions
-          path: githubactions
-     
       - run: |
-          cd githubactions
-          echo "" >> README.md
-          git config --global user.email "mazam76@gmail.com"
-          git config --global user.name "Irfan Azam"
-          git add README.md
-          git commit -m "updated the readme.md"
-          git push
-          echo "COMMIT_ID=$(git rev-parse HEAD)" >> $GITHUB_ENV
+         sleep 30
+        shell: bash
+  
+  two:
+    runs-on: ubuntu-latest
+    name: two
+    steps:
+      # Checkout smoke tests
+      - run: |
+         sleep 50
+        shell: bash
+ 
+  three:
+    runs-on: ubuntu-latest
+    name: three
+    steps:
+      # Checkout smoke tests
+      - run: |
+         sleep 40
+         exit 1
+        shell: bash
         
-      - uses: actions/checkout@v2
-        with:
-          ref: deploy/raicloud/prod
-          repository: irfanazam1/githubactions
-          path: githubactions
-       
-      - run: |
-          cd githubactions
-          git cherry-pick ${{ env.COMMIT_ID }}
-          git push
+      
+  finally:
+    runs-on: ubuntu-latest
+    name: Finalize Status
+    needs:
+     - one
+     - two
+     - three
+    if: always()
+    steps:
+    - uses: technote-space/workflow-conclusion-action@v2
+    - run: echo ${{ env.WORKFLOW_CONCLUSION }}
