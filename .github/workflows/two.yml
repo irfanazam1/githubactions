@@ -1,0 +1,20 @@
+name: two.yml
+
+on:
+ workflow_dispatch:
+   inputs:
+     sha:
+       description: 'sha'
+       required: true
+       default: ''
+    
+jobs:    
+  two:
+    runs-on: ubuntu-latest
+    name: Job Two
+    steps:
+    - run: |
+        sleep 40
+        echo ${{ inputs.sha }}
+        exit 1
+      shell: bash
