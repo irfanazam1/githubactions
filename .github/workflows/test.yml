@@ -12,7 +12,7 @@ jobs:
         with:
           owner: irfanazam1
           repo: githubactions
-          github_token: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN }}
+          github_token: ${{ secrets.PAT }}
           workflow_file_name: one.yml
           wait_interval: 300
           inputs: '{"sha":"123456"}'
@@ -28,7 +28,7 @@ jobs:
         with:
           owner: irfanazam1
           repo: githubactions
-          github_token: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN }}
+          github_token: ${{ secrets.PAT }}
           workflow_file_name: two.yml
           wait_interval: 300
           inputs: '{"sha":"123456"}'
@@ -44,7 +44,7 @@ jobs:
         with:
           owner: irfanazam1
           repo: githubactions
-          github_token: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN }}
+          github_token: ${{ secrets.PAT }}
           workflow_file_name: three.yml
           wait_interval: 300
           inputs: '{"sha":"123456"}'
