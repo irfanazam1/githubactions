@@ -70,4 +70,4 @@ jobs:
         curl --fail --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/check-runs" \
         --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
         --header 'content-type: application/json' \
-        --data '{"name": "RAICloud Benchmark", "head_sha":"${{ github.event.inputs.sha }}","conclusion": "${{ env.WORKFLOW_CONCLUSION }}", "details_url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}'
+        --data '{"name": "RAICloud Benchmark", "head_sha":"${{ github.event.inputs.sha }}", "conclusion": "${{ env.WORKFLOW_CONCLUSION }}", "output":{"text":"RAICloud Benchmark tests"},  "details_url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}'
