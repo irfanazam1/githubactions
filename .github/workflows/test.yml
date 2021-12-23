@@ -62,4 +62,8 @@ jobs:
     if: always()
     steps:
     - uses: technote-space/workflow-conclusion-action@v2
-    - run: echo ${{ env.WORKFLOW_CONCLUSION }}
+    - run: |
+        curl --fail --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/check-runs" \
+        --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+        --header 'content-type: application/json' \
+        --data '{"name": "RAICloud Benchmark", "conclusion": "${{ env.WORKFLOW_CONCLUSION }}", "details_url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}'
