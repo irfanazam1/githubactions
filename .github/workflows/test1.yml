@@ -11,9 +11,9 @@ jobs:
     name: one
     steps:
       - run: |
-        if [ ${{ inputs.scale_factor }} -gt 0 ]; then
-          echo 'Greater than zero'
-        else
-          echo 'Less than or equal to zero'
-        fi
+         if [ ${{ inputs.scale_factor }} -gt 0 ]; then
+           echo 'Greater than zero'
+         else
+           echo 'Less than or equal to zero'
+         fi
         
