@@ -11,7 +11,7 @@ jobs:
     name: one
     steps:
       - run: |
-         if [ ${{ inputs.scale_factor }} -gt 0 ]; then
+         if [ "${{ inputs.scale_factor }}" -gt 0 ]; then
            echo 'Greater than zero'
          else
            echo 'Less than or equal to zero'
