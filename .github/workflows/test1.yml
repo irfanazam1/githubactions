@@ -1,0 +1,19 @@
+name: test1
+
+on:
+ workflow_dispatch:
+   inputs:
+     scale_factor:
+       required: true
+jobs:    
+  one:
+    runs-on: ubuntu-latest
+    name: one
+    steps:
+      - run: |
+        if [ ${{ inputs.scale_factor }} -gt 0 ]; then
+          echo 'Greater than zero'
+        else
+          echo 'Less than or equal to zero'
+        fi
+        
