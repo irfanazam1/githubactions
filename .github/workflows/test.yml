@@ -70,7 +70,7 @@ jobs:
     steps:
     - uses: technote-space/workflow-conclusion-action@v2
     - name: check-failure
-      if: $env.WORKFLOW_CONCLUSION == 'failure'
+      if: env.WORKFLOW_CONCLUSION == 'failure'
       run: |
        curl --fail --request DELETE --url "https://api.github.com/repos/irfanazam1/releases/RC-${{ github.event.inputs.sha}}" \
        --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
