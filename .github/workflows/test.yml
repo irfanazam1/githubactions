@@ -63,7 +63,10 @@ jobs:
   cleanup:
     runs-on: ubuntu-latest
     name: Cleanup
-    needs: finally
+    needs:
+     - one
+     - two
+     - three
     steps:
     - uses: technote-space/workflow-conclusion-action@v2
     - name: check-failure
