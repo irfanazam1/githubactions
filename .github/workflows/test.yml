@@ -58,7 +58,6 @@ jobs:
     if: always()
     steps:
     - uses: technote-space/workflow-conclusion-action@v2
-    - name: check-status
     - run: echo "Workflow - ${{ env.WORKFLOW_CONCLUSION }}"        
  
   cleanup:
@@ -67,13 +66,13 @@ jobs:
     needs: finally
     steps:
     - uses: technote-space/workflow-conclusion-action@v2
-    - name: clean-up-task
-    if: ${{ env.WORKFLOW_CONCLUSION == 'failure' }}
-    run: |
-      curl --fail --request DELETE --url "https://api.github.com/repos/irfanazam1/releases/RC-${{ github.event.inputs.sha}}" \
+    - name: check-failure
+      if: ${{ env.WORKFLOW_CONCLUSION == 'failure' }}
+      run: |
+       curl --fail --request DELETE --url "https://api.github.com/repos/irfanazam1/releases/RC-${{ github.event.inputs.sha}}" \
        --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
        --header 'content-type: application/json'
       
-      curl --fail --request DELETE --url "https://api.github.com/repos/irfanazam1/refs/tags/RC-${{ github.event.inputs.sha}}" \
+       curl --fail --request DELETE --url "https://api.github.com/repos/irfanazam1/refs/tags/RC-${{ github.event.inputs.sha}}" \
        --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
        --header 'content-type: application/json'
