@@ -58,17 +58,7 @@ jobs:
     if: always()
     steps:
     - uses: technote-space/workflow-conclusion-action@v2
-    - run: echo "Workflow - ${{ env.WORKFLOW_CONCLUSION }}"        
- 
-  cleanup:
-    runs-on: ubuntu-latest
-    name: Cleanup
-    needs:
-     - one
-     - two
-     - three
-    steps:
-    - uses: technote-space/workflow-conclusion-action@v2
+    - run: echo "Workflow - ${{ env.WORKFLOW_CONCLUSION }}"
     - name: check-failure
       if: env.WORKFLOW_CONCLUSION == 'failure'
       run: |
