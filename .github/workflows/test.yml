@@ -27,6 +27,8 @@ jobs:
   two:
     runs-on: ubuntu-latest
     name: two
+    environment:
+      name: staging
     steps:
       - uses: convictional/trigger-workflow-and-wait@v1.3.0
         with:
