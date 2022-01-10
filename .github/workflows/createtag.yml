@@ -1,25 +1,29 @@
-name: test
-
 on:
   push:
+    # Sequence of patterns matched against refs/tags
     branches:
-      - main
-      
-jobs:    
-  one:
+      - 'main'
+
+name: Create Release
+
+jobs:
+  build:
+    name: Create Release
     runs-on: ubuntu-latest
-    name: one
     steps:
-    - name: Checkout code
-    - uses: actions/checkout@v2
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.sha }}
-        release_name: ${{ github.sha }}
-        body: ''
-        draft: false
-        prerelease: false
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.sha }}
+          release_name: Release ${{ github.sha }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false
