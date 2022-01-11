@@ -9,5 +9,23 @@ jobs:
     steps:
       - name: cleanup-release-candidates
         run: |
-          print('Hello World ....')
+          from github import Github
+          import os
+          import sys
+          from pprint import pprint
+          import requests
+          import json
+          import copy
+          import os
+          import subprocess
+          import requests
+          
+          gh = Github(os.getenv('GITHUB_TOKEN'))
+          
+          org = g.get_organization("RelationalAI")
+          repo = org.get_repo("raicode")
+          
+          releases = repo.get_releases()
+          print(release[0].tag_name()
+            
         shell: python
