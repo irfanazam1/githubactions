@@ -2,7 +2,7 @@ name: Clean Release Candidates
 
 on:
   schedule:
-    - cron: "*/1 * * * *"
+  - cron: "*/1 * * * *"
     
 jobs:
   cleanup:
