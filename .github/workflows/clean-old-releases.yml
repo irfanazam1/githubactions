@@ -26,6 +26,6 @@ jobs:
           repo = org.get_repo("githubactions")
           
           releases = repo.get_releases()
-          print(release[0].tag_name()
+          print(release[0].tag_name())
             
         shell: python
