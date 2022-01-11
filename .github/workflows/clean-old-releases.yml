@@ -1,15 +1,13 @@
-name: Clean Release Candidates
-
+name: "Close stale Releases"
 on:
   schedule:
-  - cron: "*/1 * * * *"
-    
+    - cron: "*/1 * * * *"
+
 jobs:
-  cleanup:
+  stale:
     runs-on: ubuntu-latest
     steps:
       - name: cleanup-release-candidates
         run: |
           print('Hello World ....')
         shell: python
-      
