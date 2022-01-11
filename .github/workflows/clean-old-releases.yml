@@ -1,0 +1,15 @@
+name: Clean Release Candidates
+
+on:
+  schedule:
+    - cron: "*/1 * * * *"
+    
+jobs:
+  cleanup:
+  runs-on: ubuntu-latest
+  steps:
+    - name: cleanup-release-candidates
+      run: |
+        print('Hello World ....')
+      shell: python
+      
