@@ -1,7 +1,7 @@
 name: "Close stale Releases"
 on:
   schedule:
-    - cron: "*/1 * * * *"
+  - cron: "*/1 * * * *"
 
 jobs:
   stale:
