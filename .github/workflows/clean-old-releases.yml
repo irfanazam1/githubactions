@@ -25,9 +25,11 @@ jobs:
           
           gh = Github(os.getenv('GITHUB_TOKEN'))
           
-          org = gh.get_organization("irfanazam1")
-          repo = org.get_repo("githubactions")
-          
+          #org = gh.get_organization("irfanazam1")
+          #repo = org.get_repo("githubactions")
+          for repo in gh.get_user().get_repos():
+            print(repo.name)
+          repo = gh.get_user().get_repo('githubactions')  
           releases = repo.get_releases()
           print(release[0].tag_name())
             
