@@ -6,10 +6,10 @@ on:
     
 jobs:
   cleanup:
-  runs-on: ubuntu-latest
-  steps:
-    - name: cleanup-release-candidates
-      run: |
-        print('Hello World ....')
-      shell: python
+    runs-on: ubuntu-latest
+    steps:
+      - name: cleanup-release-candidates
+        run: |
+          print('Hello World ....')
+        shell: python
       
