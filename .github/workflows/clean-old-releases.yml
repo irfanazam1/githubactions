@@ -9,8 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: install-github-api
-        run: pip install PyGithub
+        run: pip install PyGithub   
       - name: cleanup-release-candidates
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
           from github import Github
           import os
