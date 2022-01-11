@@ -25,7 +25,7 @@ jobs:
           
           gh = Github(os.getenv('GITHUB_TOKEN'))
           
-          org = g.get_organization("irfanazam1")
+          org = gh.get_organization("irfanazam1")
           repo = org.get_repo("githubactions")
           
           releases = repo.get_releases()
