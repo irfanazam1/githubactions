@@ -13,4 +13,4 @@ jobs:
          curl \
          -H "Accept: application/vnd.github+json" \ 
          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-          "https://api.github.com/repos/$GITHUB_REPOSITORY_OWNER/$GITHUB_REPOSITORY/issues/$GITHUB_SHA/labels"
+          "https://api.github.com/repos/${{ github.repository.owner }}/${{ github.repository }}/issues/${{ github.commit.sha }}/labels"
