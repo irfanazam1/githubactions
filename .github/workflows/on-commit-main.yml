@@ -13,4 +13,4 @@ jobs:
         id: pr-labels
         uses: joerick/pr-labels-action@v1.0.6
       - run: |
-          echo ${{ steps.pr-labels.outputs.labels }}
+          echo "${{ steps.pr-labels.outputs.labels }}"
