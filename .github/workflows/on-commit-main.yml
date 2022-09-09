@@ -12,4 +12,4 @@ jobs:
      - name: deploy-main
        run: |
          echo "Deploying main"
-         echo "${{ github.pull_request.labels }}"
+         echo "${{ github.event.push.labels }}"
