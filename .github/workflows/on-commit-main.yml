@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     name: on-commit-main
     steps:
-     - name: deploy-main
-       run: |
-         echo "Deploying main"
-         echo "${{ github.event.push.labels }}"
-         echo "${{ github.event.pull_request.labels }}"
+      - name: Get PR labels
+        id: pr-labels
+        uses: joerick/pr-labels-action@v1.0.6
+      - run: |
+          echo steps.pr-labels.outputs.labels
