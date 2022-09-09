@@ -13,3 +13,4 @@ jobs:
        run: |
          echo "Deploying main"
          echo "${{ github.event.push.labels }}"
+         echo "${{ github.event.pull_request.labels }}"
