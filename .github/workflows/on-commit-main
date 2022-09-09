@@ -1,0 +1,17 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - main
+     
+jobs:    
+  build:
+    runs-on: ubuntu-latest
+    name: deploy
+    steps:
+     - name: deploy-main
+       run: |
+         echo "Deploying main"
+         echo "${{ github.push.labels }}"
+     
