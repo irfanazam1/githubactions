@@ -1,0 +1,14 @@
+name: on-pr
+
+on:
+  pull_request:
+     
+jobs:    
+  build:
+    runs-on: ubuntu-latest
+    name: on-pr
+    steps:
+     - name: deploy-main
+       run: |
+         echo "Deploying main"
+         echo "${{ github.event.pull_request.labels }}"
