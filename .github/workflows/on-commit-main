@@ -1,4 +1,4 @@
-name: deploy
+name: on-commit-main
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 jobs:    
   build:
     runs-on: ubuntu-latest
-    name: deploy
+    name: on-commit-main
     steps:
      - name: deploy-main
        run: |
