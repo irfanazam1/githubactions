@@ -3,7 +3,7 @@ name: on-pr
 on:
   push:
     branches:
-      - master
+      - main
      
 jobs:    
  get_pr_labels_job:
