@@ -12,7 +12,7 @@ jobs:
     steps:
     - name: Get PR labels action step
       id: get_pr_labels
-      uses: irfanazam1/get-pr-labels-push-action@main
+      uses: irfanazam1/get-pr-labels-on-push-action@v1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
 
