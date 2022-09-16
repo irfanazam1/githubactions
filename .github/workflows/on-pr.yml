@@ -17,4 +17,4 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: See result
-      run: echo "${{ steps.check_pr_labels.outputs.result }}"
+      run: echo "${{ steps.get_pr_labels.outputs.result }}"
