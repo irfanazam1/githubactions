@@ -1,7 +1,9 @@
 name: on-pr
 
 on:
-  pull_request:
+  push:
+    branches:
+      - master
      
 jobs:    
  get_pr_labels_job:
