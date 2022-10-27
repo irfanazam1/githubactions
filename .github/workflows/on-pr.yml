@@ -18,3 +18,13 @@ jobs:
 
     - name: See result
       run: echo "${{ steps.get_pr_labels.outputs.result }}"
+    
+    - uses: actions/setup-python@v4.3.0
+      with:
+        python-version: 3.10.0
+        
+    - run: |
+        export SHA="${{ github.sha }}"
+        export GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}"
+        id = `python ./.github/scripts/get_check_run_id.py`
+        echo id
