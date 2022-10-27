@@ -50,6 +50,11 @@ jobs:
         --header 'content-type: application/json' \
         --data '{"state": "success", "description": "smoke tests completed successfully", "context": "Smoke Tests", "target_url": "http://link-in-status/"}'
         
+        curl --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/check-runs" \
+        --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+        --header 'content-type: application/json' \
+        --data '{"name": "smoke-tests", "head_sha": "${{ github.event.inputs.sha }}", "conclusion": "completed", "details_url": "https://google.coom"}'
+        
   deprovision-compute:
     runs-on: ubuntu-latest
     name: De-provision Compute
