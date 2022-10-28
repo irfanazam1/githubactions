@@ -28,5 +28,5 @@ jobs:
     - run: |
         export SHA="${{ github.sha }}"
         export GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}"
-        id = `python ./.github/scripts/get_check_run_id.py`
-        echo id
+        id=`python ./.github/scripts/get_check_run_id.py`
+        echo $id
