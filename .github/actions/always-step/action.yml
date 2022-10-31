@@ -4,8 +4,20 @@ runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v3
+    - uses: technote-space/workflow-conclusion-action@v3
     - name: 'Fail the workflow'
       id: check-step
       run: |
         exit 1
       shell: bash
+      
+      if always():
+    - name: 'always step'
+      id: always-step
+      if: env.WORKFLOW_CONCLUSION == 'failure'
+      run: echo 'failed'
+      
+      if: env.WORKFLOW_CONCLUSION == 'completed'
+      run: echo 'completed'
+      
+      
