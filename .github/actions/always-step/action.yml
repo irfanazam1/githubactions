@@ -8,3 +8,4 @@ runs:
       id: check-step
       run: |
         exit 1
+      shell: bash
