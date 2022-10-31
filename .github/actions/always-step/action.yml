@@ -11,14 +11,13 @@ runs:
         exit 1
       shell: bash
 
-    - name: 'always step'
-      if always():
-      id: always-step
-      if: env.WORKFLOW_CONCLUSION == 'failure'
-      run: echo 'failed'
+    
+    if: always() && env.WORKFLOW_CONCLUSION == 'failure'  
+    - run: echo 'failed'
       shell: bash
+    
+    if: always() && env.WORKFLOW_CONCLUSION == 'completed'
+    - run: echo 'completed'
+      shell: bash  
       
-      if: env.WORKFLOW_CONCLUSION == 'completed'
-      run: echo 'completed'
-      shell: bash
       
