@@ -1,0 +1,12 @@
+name: test-composite-action-always-step
+
+on:
+ workflow_dispatch:
+   
+jobs:    
+  one:
+    runs-on: ubuntu-latest
+    name: "Test composite action always step"
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./.github/actions/always-step
