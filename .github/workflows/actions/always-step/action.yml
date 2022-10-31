@@ -1,0 +1,12 @@
+name: 'Test Always Step'
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3
+    - name: 'Fail the workflow'
+      id: check-step
+      run: |
+        exit 1
+      
+     
