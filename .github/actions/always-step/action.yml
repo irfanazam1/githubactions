@@ -13,11 +13,10 @@ runs:
       shell: bash
       
     - name: Failure 
+      if: always()
       uses: julia-actions/setup-julia@v1
       with:
         version: 1.8.1
-      if: |
-        always() && (env.WORKFLOW_CONCLUSION == 'failure')
         
     - name: Success
       uses: julia-actions/setup-python@v3
