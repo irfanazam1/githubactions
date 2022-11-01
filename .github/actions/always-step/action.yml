@@ -12,7 +12,7 @@ runs:
         echo "WORKFLOW_CONCLUSION=completed" >> $GITHUB_ENV
       shell: bash
       
-    - name: Failure
+    - name: Check Status
       if: |
         always() &&
         env.WORKFLOW_CONCLUSION=='failure'
@@ -20,11 +20,10 @@ runs:
       with:
         version: 1.8.1
     
-    - name: Failure
       if: |
         always() &&
         env.WORKFLOW_CONCLUSION=='completed'
-      uses: python-actions/setup-python@v3
+      uses: actions/setup-python@v3
       with:
         version: 3.10.7
           
