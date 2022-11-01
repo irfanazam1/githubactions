@@ -19,7 +19,7 @@ runs:
       if: |
         always() && (env.WORKFLOW_CONCLUSION == 'failure')
       
-     - uses: julia-actions/setup-python@v3
+    - uses: julia-actions/setup-python@v3
       with:
         version: 1.8.1
       if: |
