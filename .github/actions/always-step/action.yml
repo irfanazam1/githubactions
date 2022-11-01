@@ -12,17 +12,19 @@ runs:
         echo "WORKFLOW_CONCLUSION=completed" >> $GITHUB_ENV
       shell: bash
       
-   
-    - uses: julia-actions/setup-julia@v1
-      with:
-        version: 1.8.1
+    - name: Failure 
       if: |
         always() && (env.WORKFLOW_CONCLUSION == 'failure')
-      
-    - uses: julia-actions/setup-python@v3
+      uses: julia-actions/setup-julia@v1
       with:
         version: 1.8.1
+    
+    - name: Success  
       if: |
         always() && (env.WORKFLOW_CONCLUSION == 'completed')
+      uses: julia-actions/setup-python@v3
+      with:
+        version: 1.8.1
+      
       
       
