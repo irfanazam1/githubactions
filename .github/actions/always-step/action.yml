@@ -12,7 +12,7 @@ runs:
         echo "WORKFLOW_CONCLUSION=completed" >> $GITHUB_ENV
       shell: bash
       
-    - name: Check Status
+    - id: set_failure
       if: |
         always() &&
         env.WORKFLOW_CONCLUSION=='failure'
@@ -20,6 +20,7 @@ runs:
       with:
         version: 1.8.1
     
+    - id: set_success 
       if: |
         always() &&
         env.WORKFLOW_CONCLUSION=='completed'
