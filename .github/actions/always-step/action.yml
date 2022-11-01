@@ -8,7 +8,8 @@ runs:
       id: check-step
       run: |
         echo "WORKFLOW_CONCLUSION=failure" >> $GITHUB_ENV
-        exit 1
+        echo "Success"
+        echo "WORKFLOW_CONCLUSION=completed" >> $GITHUB_ENV
       shell: bash
       
     - run: echo 'failed'
