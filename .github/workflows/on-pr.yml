@@ -1,4 +1,4 @@
-name: on-pr
+name: "on pr"
 
 on:
   push:
