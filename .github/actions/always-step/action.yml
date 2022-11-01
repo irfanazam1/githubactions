@@ -4,11 +4,12 @@ runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v3
-    - uses: technote-space/workflow-conclusion-action@v3
     - name: 'Fail the workflow'
       id: check-step
       run: |
+        echo "WORKFLOW_CONCLUSION=failure" >> $GITHUB_ENV
         exit 1
+        echo "WORKFLOW_CONCLUSION=completed" >> $GITHUB_ENV
       shell: bash
 
     
