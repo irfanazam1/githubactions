@@ -12,7 +12,10 @@ runs:
         echo "WORKFLOW_CONCLUSION=completed" >> $GITHUB_ENV
       shell: bash
       
-    - name: Failure 
+    - name: Failure
+      if: |
+        always()
+        env.WORKFLOW_CONCLUSION=='failure'
       uses: julia-actions/setup-julia@v1
       with:
         version: 1.8.1
