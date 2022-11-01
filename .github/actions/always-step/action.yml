@@ -12,14 +12,14 @@ runs:
         echo "WORKFLOW_CONCLUSION=completed" >> $GITHUB_ENV
       shell: bash
       
-    - run: echo 'failed'
-      shell: bash
       if: |
         always() && (env.WORKFLOW_CONCLUSION == 'failure')
-    
-    - run: echo 'completed'
+    - run: echo 'failed'
       shell: bash
+      
       if: |
         always() && (env.WORKFLOW_CONCLUSION == 'completed')
+    - run: echo 'completed'
+      shell: bash
       
       
