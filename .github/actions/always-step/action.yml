@@ -8,11 +8,10 @@ runs:
       id: check-step
       run: |
         echo "WORKFLOW_CONCLUSION=failure" >> $GITHUB_ENV
-        exit 1
+        exit 0
         echo "WORKFLOW_CONCLUSION=completed" >> $GITHUB_ENV
       shell: bash
-
-    
+      
       if: |
         always() &&
         ${{ env.WORKFLOW_CONCLUSION == 'failure' }}
