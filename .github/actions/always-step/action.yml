@@ -14,7 +14,7 @@ runs:
       
     - name: Failure
       if: |
-        always()
+        always() &&
         env.WORKFLOW_CONCLUSION=='failure'
       uses: julia-actions/setup-julia@v1
       with:
