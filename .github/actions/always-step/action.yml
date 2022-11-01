@@ -19,5 +19,13 @@ runs:
       uses: julia-actions/setup-julia@v1
       with:
         version: 1.8.1
+    
+    - name: Failure
+      if: |
+        always() &&
+        env.WORKFLOW_CONCLUSION=='completed'
+      uses: python-actions/setup-python@v3
+      with:
+        version: 10.3.10
           
       
