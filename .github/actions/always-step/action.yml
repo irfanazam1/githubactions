@@ -8,18 +8,18 @@ runs:
       id: check-step
       run: |
         echo "WORKFLOW_CONCLUSION=failure" >> $GITHUB_ENV
-        exit 0
+        exit 1
         echo "WORKFLOW_CONCLUSION=completed" >> $GITHUB_ENV
       shell: bash
       
-      if: |
-        ${{ env.WORKFLOW_CONCLUSION == 'failure' }}
+      if: always() 
     - run: echo 'failed'
       shell: bash
+      if: ${{ env.WORKFLOW_CONCLUSION == 'failure' }}
     
-      if: |
-        ${{ env.WORKFLOW_CONCLUSION == 'completed' }}
+      if: always()
     - run: echo 'completed'
-      shell: bash  
+      shell: bash
+      if: ${{ env.WORKFLOW_CONCLUSION == 'completed' }}
       
       
