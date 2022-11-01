@@ -13,11 +13,11 @@ runs:
     - run: echo 'failed'
       shell: bash
       if: |
-        always() && ${{ env.WORKFLOW_CONCLUSION == 'failure' }}
+        env.WORKFLOW_CONCLUSION == 'failure' 
     
     - run: echo 'completed'
       shell: bash
       if: |
-        always() && ${{ env.WORKFLOW_CONCLUSION == 'completed' }}
+        env.WORKFLOW_CONCLUSION == 'completed' 
       
       
