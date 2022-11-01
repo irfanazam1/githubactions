@@ -8,16 +8,17 @@ runs:
       id: check-step
       run: |
         echo "WORKFLOW_CONCLUSION=failure" >> $GITHUB_ENV
+        exit 1
       shell: bash
       
     - run: echo 'failed'
       shell: bash
       if: |
-        env.WORKFLOW_CONCLUSION == 'failure' 
+        always() && env.WORKFLOW_CONCLUSION == 'failure' 
     
     - run: echo 'completed'
       shell: bash
       if: |
-        env.WORKFLOW_CONCLUSION == 'completed' 
+        always() && env.WORKFLOW_CONCLUSION == 'failure
       
       
