@@ -34,7 +34,7 @@ jobs:
     - name: check-re-run
       if: ${{ env.WORKFLOW_CONCLUSION == 'failure' }}
       run: |
-        failed_jobs_ids=echo `curl -s -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{secrets.GITHUB_TOKEN }}" https://api.github.com/repos/irfanazam1/githubactions/actions/runs/${{ github.run_id }}/jobs | jq -r '.jobs[] | select(.conclusion | contains("failure")).id'`
+        failed_jobs_ids=echo `curl -s -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{secrets.GITHUB_TOKEN }}" https://api.github.com/repos/irfanazam1/githubactions/actions/runs/${{ github.run_id }}/jobs | jq -r '.jobs[] | select(.conclusion | select(. != null) | contains("failure")).id'`
         for id in "${failed_jobs_ids[@]}"
         do
           curl -X POST -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{secrets.GITHUB_TOKEN }}" https://api.github.com/repos/irfanazam1/githubactions/actions/jobs/$id/rerun   
