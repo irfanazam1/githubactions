@@ -32,7 +32,7 @@ jobs:
     steps:
     - uses: technote-space/workflow-conclusion-action@v3
     - name: check-re-run
-      if: ${{ env.WORKFLOW_CONCLUSION == 'failed' }}
+      if: ${{ env.WORKFLOW_CONCLUSION == 'failure' }}
       run: |
         runs = `curl -s -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{secrets.GITHUB_TOKEN }}" https://api.github.com/repos/OWNER/REPO/actions/workflows/${{ github.run_id }}/runs | jq -r '.workflow_runs[] | select(.run_attempt | equals("1")).run_attempt'`
         echo "Runs = $runs"
