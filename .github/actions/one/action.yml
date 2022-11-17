@@ -1,0 +1,10 @@
+name: Action one
+
+uns:
+  using: "composite"
+  steps:
+  - run: |
+      echo ">>>>>>>>> Failure"
+      exit 1
+    shell: bash
+  
