@@ -1,0 +1,9 @@
+name: Action twoo
+
+uns:
+  using: "composite"
+  steps:
+  - run: |
+      echo ">>>>>>>>> Success"
+      exit 1
+    shell: bash
