@@ -2,11 +2,6 @@ name: Test re-run
 
 on:
   workflow_dispatch:
-    inputs:
-      sha:
-        description: 'commit SHA'
-        required: false
-
 
 jobs:
   SuccessfulJob:
@@ -28,7 +23,7 @@ jobs:
   Finalize-Result:
     name: Finalize Results
     needs:
-      - SuccesfulJob
+      - SuccessfulJob
       - FailedJob
     runs-on: ubuntu-latest
     if: always()
