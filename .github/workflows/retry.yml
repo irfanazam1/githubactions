@@ -19,6 +19,7 @@ jobs:
           attempt_delay: 2000
                  
   two:
+    runs-on: ubuntu-latest
     name: Two
     steps:
      - uses: actions/checkout@v3
