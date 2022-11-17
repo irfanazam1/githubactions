@@ -36,9 +36,6 @@ jobs:
       run: |
         runs=`curl -s -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{secrets.GITHUB_TOKEN }}" https://api.github.com/repos/irfanazam1/githubactions/actions/runs/${{ github.run_id }} | jq -r '.run_attempt'`
         echo "Runs = $runs"
-        if [ $runs = "1" ];
-        then
-          curl --fail --request POST --url "https://api.github.com/repos/irfanazam1/githubactions/actions/runs/${{ github.run_id }}/rerun-failed-jobs" \
-          --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-          --header 'content-type: application/json'
+        if [ $runs = "1" ]; then
+          curl -s -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{secrets.GITHUB_TOKEN }}" https://api.github.com/repos/irfanazam1/githubactions/actions/runs/${{ github.run_id }}/rerun-failed-jobs
         fi
