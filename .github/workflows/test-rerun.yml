@@ -34,13 +34,14 @@ jobs:
     if: always()
     steps:
     - uses: technote-space/workflow-conclusion-action@v3
-    if: ${{ env.WORKFLOW_CONCLUSION == 'failed' }}
-    - run: |
+    - name: check-re-run
+      if: ${{ env.WORKFLOW_CONCLUSION == 'failed' }}
+      run: |
         runs = `curl -s -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{secrets.GITHUB_TOKEN }}" https://api.github.com/repos/OWNER/REPO/actions/workflows/${{ github.run_id }}/runs | jq -r '.workflow_runs[] | select(.run_attempt | equals("1")).run_attempt'`
         echo "Runs = $runs"
-        if [$runs == "1"]; 
+        if [$runs == "1"]
         then
           curl --fail --request POST --url "https://api.github.com/repos/OWNER/REPO/actions/runs/${{ github.run_id }}/rerun-failed-jobs" \
           --header "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
           --header 'content-type: application/json'
-       fi 
+        fi
