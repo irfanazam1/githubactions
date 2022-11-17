@@ -1,0 +1,32 @@
+name: Retry
+
+on:
+ workflow_dispatch:
+   
+jobs:    
+  one:
+    runs-on: ubuntu-latest
+    name: One
+    steps:
+     - uses: actions/checkout@v3
+     - uses: Wandalen/wretry.action@master
+       with:
+          action: ./.github/actions/one
+          with: |
+            client_id: 123
+            client_secret: 456
+          attempt_limit: 2
+          attempt_delay: 2000
+                 
+  two:
+    name: Two
+    steps:
+     - uses: actions/checkout@v3
+     - uses: Wandalen/wretry.action@master
+       with:
+          action: ./.github/actions/two
+          with: |
+            client_id: 456
+            client_secret: 789
+          attempt_limit: 2
+          attempt_delay: 2000
