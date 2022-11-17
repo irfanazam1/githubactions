@@ -1,9 +1,19 @@
-name: Action twoo
+name: Action two
 
-uns:
+inputs:
+  client_id:
+    required: true
+    description: 'client id'
+  
+  client_secret:
+    required: true
+    description: 'client secret'
+
+runs:
   using: "composite"
   steps:
   - run: |
+      echo "CLIENT_ID = ${{ inputs.client_id }}"
+      echo "CLIENT_SECRET = ${{ inputs.client_secret }}"
       echo ">>>>>>>>> Success"
-      exit 1
     shell: bash
