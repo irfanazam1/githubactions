@@ -10,11 +10,9 @@ on:
     
 jobs:    
   dual-test:
-    runs-on: ubuntu-latest
-    name: Dual Test
-    steps:
-     - uses: actions/checkout@v3
-     - uses: ./.github/workflows/dual.yml
-       with:
-        sha: ${{ github.sha }}
+    name: dual test
+    uses: ./.github/workflows/dual.yml
+    with:
+      environment: ${{ github.event.inputs.sha }}
+    secrets: inherit
      
