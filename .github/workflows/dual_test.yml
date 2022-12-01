@@ -13,6 +13,6 @@ jobs:
     name: dual test
     uses: ./.github/workflows/dual.yml
     with:
-      environment: ${{ github.event.inputs.sha }}
+      sha: ${{ github.event.inputs.sha }}
     secrets: inherit
      
