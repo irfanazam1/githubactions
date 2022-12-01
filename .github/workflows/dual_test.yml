@@ -9,8 +9,12 @@ on:
        default: ''
     
 jobs:    
-    name: RAI-SDK-Tests
-    uses: ./.github/workflows/dual.yml
-    with:
-      sha: ${{ github.sha }}
-    secrets: inherit
+  dual-test:
+    runs-on: ubuntu-latest
+    name: Dual Test
+    steps:
+     - uses: actions/checkout@v3
+     - uses: ./.github/workflows/dual.yml
+       with:
+        sha: ${{ github.sha }}
+     
