@@ -1,0 +1,16 @@
+name: dual_test.yml
+
+on:
+ workflow_dispatch:
+   inputs:
+     sha:
+       description: 'sha'
+       required: true
+       default: ''
+    
+jobs:    
+    name: RAI-SDK-Tests
+    uses: ./.github/workflows/dual.yml
+    with:
+      sha: ${{ github.sha }}
+    secrets: inherit
