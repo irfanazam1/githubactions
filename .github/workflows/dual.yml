@@ -1,0 +1,20 @@
+name: dual.yml
+
+on:
+ workflow_call:
+ workflow_dispatch:
+   inputs:
+     sha:
+       description: 'sha'
+       required: true
+       default: ''
+    
+jobs:    
+  one:
+    runs-on: ubuntu-latest
+    name: Job One
+    steps:
+    - run: |
+        sleep 30
+        echo ${{ github.event.inputs.sha }}
+      shell: bash
