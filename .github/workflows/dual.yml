@@ -1,8 +1,15 @@
 name: dual.yml
 
 on:
- workflow_call:
- workflow_dispatch:
+  workflow_call:
+   inputs:
+     sha:
+       type: string
+       description: 'sha'
+       required: true
+       default: ''
+ 
+  workflow_dispatch:
    inputs:
      sha:
        description: 'sha'
