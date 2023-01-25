@@ -46,7 +46,8 @@ jobs:
       status: ${{ steps.compute-status.outputs.status }}
     if: always()
     steps:
-    - run: |
+    - id: compute-status 
+      run: |
         echo "Job Four"
         if  [[ "${{ needs.one.result }}" == "failure" || "${{ needs.two.result }}" == "failure" || \
           "${{ needs.one.result }}" == "failure" ]]; then
