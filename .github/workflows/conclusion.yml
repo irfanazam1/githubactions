@@ -1,0 +1,67 @@
+name: conclusion.yml
+
+on:
+ workflow_dispatch:
+    
+jobs:    
+  one:
+    runs-on: ubuntu-latest
+    name: Job One
+    strategy:
+      fail-fast: false
+    steps:
+    - run: |
+        sleep 30
+        echo "Job One"
+  two:
+    runs-on: ubuntu-latest
+    name: Job Two
+    strategy:
+      fail-fast: false
+    steps:
+    - run: |
+        sleep 20
+        echo "Job Two"
+        exit 1
+      
+  three:
+    runs-on: ubuntu-latest
+    name: Job Three
+    strategy:
+      fail-fast: false
+    steps:
+    - run: |
+        sleep 10
+        echo "Job Three"
+        echo ${{ github.event.inputs.sha }}
+ 
+  four:
+    runs-on: ubuntu-latest
+    name: Job Four
+    needs:
+      - one
+      - two
+      - three
+    outputs:
+      status: ${{ steps.compute-status.outputs.status }}
+    if: always()
+    steps:
+    - run: |
+        echo "Job Four"
+        if  [[ "${{ needs.one.result }}" == "failure" || "${{ needs.two.result }}" == "failure" || \
+          "${{ needs.one.result }}" == "failure" ]]; then
+          echo "status=failure" >> $GITHUB_OUTPUT
+        else
+          echo "status=success" >> $GITHUB_OUTPUT
+        fi
+        
+  five:
+    runs-on: ubuntu-latest
+    name: Job Five
+    needs:
+      - four
+    if: always()
+    steps:
+    - run: |
+        echo "Job Five"
+        echo "${{ needs.four.outputs.status }}"
